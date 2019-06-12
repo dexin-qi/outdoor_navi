@@ -1,0 +1,22 @@
+<launch>
+    <param name="robot_description" textfile="$(find opac_navi)/urdf/trans_with_rsliar.urdf" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="true">
+    	<param name="publish_frequency" type="double" value="50" />
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="rslidar_joint" args="0 0 0.034 0 0 0 base_rslidar rslidar 10"/>
+
+    <include file="$(find trans_drive)/launch/robot_joystick.launch"/>
+
+    <node name="robot_drive_node" pkg="trans_drive" type="robot_drive_node" output="screen"/>
+
+    <node name="robot_control_node" pkg="trans_drive" type="robot_controller_node" output="screen"/>
+
+    <node name="odom_transform" pkg="trans_drive" type="odom_transform_node" />
+
+    <include file="$(find opac_navi)/launch/opac_optim_lidar.launch" />
+
+    <include file="$(find ira_laser_tools)/launch/laserscan_multi_merger.launch" />
+    
+</launch>

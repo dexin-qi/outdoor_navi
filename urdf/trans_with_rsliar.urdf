@@ -1,0 +1,294 @@
+<robot
+  name="trans_description">
+  <link
+    name="base_footprint">
+    <inertial>
+      <origin
+        xyz="0.0423221521840477 -0.00173672925874951 0.054353414404635"
+        rpy="0 0 0" />
+      <mass
+        value="68.5194284112383" />
+      <inertia
+        ixx="0.790663275846019"
+        ixy="0.0232829126536391"
+        ixz="-0.0773736233498233"
+        iyy="1.23156662935215"
+        iyz="0.00466531888657739"
+        izz="1.51459030473315" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_footprint.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_footprint.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0173380070279787 -4.72144319634944E-06 0.00598506917438554"
+        rpy="0 0 0" />
+      <mass
+        value="31.5117429892461" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_link"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_footprint" />
+    <child
+      link="base_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="base_laser_link_1">
+    <inertial>
+      <origin
+        xyz="-0.012111488907577 -2.13870116479513E-05 0.00718678849928482"
+        rpy="0 0 0" />
+      <mass
+        value="0.200565378495873" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_laser_link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_laser_link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_laser_link_1"
+    type="fixed">
+    <origin
+      xyz="0.40834389165276 0 0.0887514391572773"
+      rpy="3.39891700064667E-12 6.12510995832477E-16 -5.86572302689513E-16" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_laser_link_1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="base_laser_link_2">
+    <inertial>
+      <origin
+        xyz="-0.0121114889088191 -2.13870129186822E-05 0.00718678849932092"
+        rpy="0 0 0" />
+      <mass
+        value="0.200565378507489" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_laser_link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_laser_link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_laser_link_2"
+    type="fixed">
+    <origin
+      xyz="-0.403343891652756 0 0.0887514391572774"
+      rpy="3.39882673167007E-12 -9.08448457229719E-18 3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_laser_link_2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="base_rslidar">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.0525" length="0.08"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.0525" length="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_rslidar_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.535"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_rslidar" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="base_imu">
+    <inertial>
+      <origin
+        xyz="0.00121028761483105 2.57102975276501E-09 0.0135985901586212"
+        rpy="0 0 0" />
+      <mass
+        value="0.0829739718359606" />
+      <inertia
+        ixx="3.3430306443895E-08"
+        ixy="-1.45054147852129E-11"
+        ixz="2.97430939631417E-07"
+        iyy="6.05913704494545E-06"
+        iyz="3.90671228860152E-13"
+        izz="6.02570673858268E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_imu.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://trans_description/meshes/base_imu.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_imu"
+    type="fixed">
+    <origin
+      xyz="0.3145 0 0.012"
+      rpy="1.04738021191052E-16 1.93022345439388E-30 4.50359279056255E-17" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_imu" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

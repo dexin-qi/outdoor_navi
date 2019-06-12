@@ -1,0 +1,95 @@
+obstacle_range: 3.0
+raytrace_range: 3.5
+
+max_obstacle_height: 0.60  # assume something like an arm is mounted on top of the robot
+
+# Obstacle Cost Shaping (http://wiki.ros.org/costmap_2d/hydro/inflation)
+#robot_radius: 0.6 # distance a circular robot should be clear of the obstacle (kobuki: 0.18)
+footprint: [[0.5,0.4],[0.5,-0.4],[-0.5,-0.4],[-0.5,0.4]]  # if the robot is not circular
+#[[0.4635,0.332],[0.4635,-0.332],[-0.4505,-0.332],[-0.4505,0.332]]
+#[[0.48,0.35],[0.48,-0.35],[-0.46,-0.35],[-0.46,0.35]]  # if the robot is not circular
+
+map_type: costmap #voxel
+
+obstacle_layer:
+  enabled:              true
+  max_obstacle_height:  0.6
+  origin_z:             0.0
+  z_resolution:         0.2
+  z_voxels:             2
+  unknown_threshold:    15
+  mark_threshold:       0
+  combination_method:   1
+  track_unknown_space:  true    #true needed for disabling global path planning through unknown space
+  obstacle_range: 2.5
+  raytrace_range: 3.0
+  origin_z: 0.0
+  z_resolution: 0.2
+  z_voxels: 2
+  publish_voxel_map: false
+  observation_sources: scan
+  scan:
+    sensor_frame: base_link
+    data_type: LaserScan
+    topic: /scan
+    inf_is_valid: true
+    marking: true
+    clearing: true
+    min_obstacle_height: 0.0 # 0.25
+    max_obstacle_height: 0.6
+  pointcloud:
+    sensor_frame: base_link
+    data_type: PointCloud2
+    topic: /rslidar_points
+    inf_is_valid: true
+    marking: true
+    clearing: true
+    min_obstacle_height: 0.0 # 0.25
+    max_obstacle_height: 0.6
+  # pointcloud:
+  #   sensor_frame: base_link
+  #   data_type: PointCloud2
+  #   topic: /merged_cloud
+  #   inf_is_valid: true
+  #   marking: true
+  #   clearing: true
+  #   min_obstacle_height: 0.0 # 0.25
+  #   max_obstacle_height: 0.6
+  # scan_1:
+  #   sensor_frame: base_laser_link_1
+  #   data_type: LaserScan
+  #   topic: /scan_1
+  #   marking: true
+  #   clearing: true
+  #   inf_is_valid: true
+  #   min_obstacle_height: 0.0 # 0.25
+  #   max_obstacle_height: 0.6
+  # scan_2:
+  #   sensor_frame: base_laser_link_2
+  #   data_type: LaserScan
+  #   topic: /scan_2
+  #   marking: true
+  #   clearing: true
+  #   inf_is_valid: true 
+  #   min_obstacle_height: 0.0 # 0.25
+  #   max_obstacle_height: 0.6
+  # bump:
+  #   sensor_frame: camera_link
+  #   data_type: PointCloud2
+  #   topic: /camera/depth/color/points # mobile_base/sensors/bumper_pointcloud
+  #   marking: true
+  #   clearing: true #false
+  #   min_obstacle_height: 0.05
+  #   max_obstacle_height: 1.0
+  # for debugging only, let's you see the entire voxel grid
+
+#cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
+inflation_layer:
+  enabled:              true
+  cost_scaling_factor:  10.0 #越大越陡 # exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius:     0.50  # max. distance from an obstacle at which costs are incurred for planning paths.
+
+static_layer:
+  enabled:              true
+  
+

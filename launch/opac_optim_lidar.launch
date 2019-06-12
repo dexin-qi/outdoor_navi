@@ -1,0 +1,21 @@
+<launch>
+  <arg name="nodelet_manager" default="opac_navi_nodelet_manager" />
+
+  <include file="$(find rslidar_pointcloud)/launch/cloud_nodelet.launch">
+    <arg name="manager" value="opac_navi_nodelet_manager"/>
+  </include>
+
+  <node pkg="nodelet" type="nodelet" name="optimal_lidar" args="load opac_navi/OptimLidarNodelet $(arg nodelet_manager)" output="screen">
+    <param name="points_topic" value="/rslidar_points"/>
+
+  </node>
+
+  <!-- <param name="robot_description" textfile="$(find opac_navi)/urdf/trans_with_rsliar.urdf" />
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="true">
+    <param name="publish_frequency" type="double" value="50" />
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="rslidar_joint" args="0 0 -0.5 0 0 0 base_rslidar rslidar 10"/> -->
+
+</launch>

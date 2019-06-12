@@ -1,0 +1,3 @@
+<library path="lib/liboptim_lidar_nodelet">
+  <class name="opac_navi/OptimLidarNodelet" type="opac_navi::OptimLidarNodelet" base_class_type="nodelet::Nodelet" />
+</library>

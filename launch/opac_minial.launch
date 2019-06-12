@@ -1,0 +1,57 @@
+<launch>
+    <param name="robot_description" textfile="$(find opac_navi)/urdf/trans_with_rsliar.urdf" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="true">
+    	<param name="publish_frequency" type="double" value="50" />
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="rslidar_joint" args="0 0 -0.5 0 0 0 base_rslidar rslidar 10"/>
+
+    <include file="$(find trans_drive)/launch/robot_joystick.launch"/>
+
+    <node name="robot_drive_node" pkg="trans_drive" type="robot_drive_node" output="screen"/>
+
+    <node name="robot_control_node" pkg="trans_drive" type="robot_controller_node" output="screen"/>
+
+    <node name="odom_transform" pkg="trans_drive" type="odom_transform_node" />
+
+    <!-- <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" >
+        <param name="output_frame" value="odom_combined"/>
+        <param name="freq" value="50.0"/>
+        <param name="sensor_timeout" value="1.0"/>
+        <param name="odom_used" value="true"/>
+        <param name="imu_used" value="true"/>
+        <param name="vo_used" value="false"/>
+        <remap from="/robot_pose_ekf/odom_combined" to="/odom_combined"/> 
+    </node>  -->
+
+    <include file="$(find rslidar_pointcloud)/launch/rs_lidar_16.launch" />
+
+    <!-- run pointcloud_to_laserscan node -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+        <remap from="cloud_in" to="/rslidar_points"/>
+        <rosparam>
+            # target_frame: rslidar # Leave disabled to output scan in pointcloud frame
+            transform_tolerance: 0.01
+            min_height: -0.6
+            max_height: 0.2
+
+            angle_min: -3.1415926 # -M_PI
+            angle_max: 3.1415926 # M_PI
+            angle_increment: 0.003 # 0.17degree
+            scan_time: 0.1
+            range_min: 0.4
+            range_max: 20.0
+            use_inf: true
+            inf_epsilon: 1.0
+
+            # Concurrency level, affects number of pointclouds queued for processing and number of threads used
+            # 0 : Detect number of cores
+            # 1 : Single threaded
+            # 2->inf : Parallelism level
+            concurrency_level: 1
+        </rosparam>
+    </node>
+
+    <!-- <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find opac_navi)/rviz/opac_rviz.rviz" /> -->
+</launch>
